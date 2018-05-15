@@ -9,7 +9,7 @@ step 2 : To run the server
             5. The server will be started.
 step 3: To run the node project 
             1. Go to the nodejs project path in the terminal
-            2. Run the command (npm install)
+            2. Run the command (npm install) 
             3. And again the run the command (babel-node server.js)
 step 4 : To run the react project
             1. Go to the reactjs project path in the terminal
