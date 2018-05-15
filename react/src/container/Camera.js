@@ -19,7 +19,7 @@ export default class Home extends React.Component {
 
         axios.get('http://localhost:3000/getdata', { params: { "latitude": latitude, "longitude": longitude } })
             .then(response => this.setState({
-                traffic: response.data.customers
+                traffic: response.data.traffic
             })).catch(error =>
                 console.log(error)
             )

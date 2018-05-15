@@ -44,7 +44,7 @@ export default class Home extends React.Component {
   render() { 
     return (
       <div>
-        <img src = {require('../assets/newimages.jpg')}onClick={this.navigateToEdit.bind(this,this.state.latitude,this.state.longitude)} className="newimage"></img>
+        <img src = {require('../assets/newimages.jpg')}onClick={this.navigateToEdit.bind(this,this.state.latitude,this.state.longitude)} className="cameraicon"></img>
       </div>
     )
   }

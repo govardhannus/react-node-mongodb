@@ -43,16 +43,16 @@ MongoClient.connect(url, function (err, db) {
 
         // Deleting the  MongoDB table before inserting into MOgoDB.
         MongoClient.connect(url, function (err, db) {
-          if (err) throw err;
+         // if (err) throw err;
           var myobj = traffic;
-          db.collection("customers", function (err, collection) {
+          db.collection("traffic", function (err, collection) {
             collection.remove({}, function (err, removed) {
             });
           });
         });
         // After deleting data the MongoDB here were inserting the data  
         MongoClient.connect(url, function (err, db) {
-          if (err) throw err;
+         // if (err) throw err;
           var myobj = traffic;
           for (var i = 0; i < myobj.length; i++) {
             var newobj = {
@@ -64,15 +64,15 @@ MongoClient.connect(url, function (err, db) {
               }
             }
 
-            db.collection("customers").insertOne(newobj, function (err, res) {
-              if (err) throw err;
+            db.collection("traffic").insertOne(newobj, function (err, res) {
+              //if (err) throw err;
             });
           }
           console.log("Data is inserted into MongoDB");
-          db.collection("customers").ensureIndex({ loc: "2d" });
+          //db.collection("traffic").ensureIndex({ loc: "2d" });
           db.close();
         });
-      }, 3000)
+      }, 300000)
     })
   db.close();
 });
@@ -88,15 +88,15 @@ app.get('/getdata', function (req, res, next) {
     } else {
       console.log('connect is enabled', url)
     }
-    var collection = db.collection('customers');
+    var collection = db.collection('traffic');
     var latitude = req.query.latitude;
     var longitude = req.query.longitude;
     console.log("lat" + latitude)
     console.log("long" + longitude)
-
-    collection.find({ loc: { $near: [parseFloat(latitude), parseFloat(longitude)] } }).limit(5).toArray(function (err, result) {
+    db.collection("traffic").ensureIndex({ loc: "2d" });
+    collection.find({ loc: { $near: [parseFloat(latitude), parseFloat(longitude)] } }).limit(10).toArray(function (err, result) {
       res.json({
-        "customers": result
+        "traffic": result
       });
     })
   })
